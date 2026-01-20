@@ -5,6 +5,7 @@ import { Controls } from "./Controls";
 import { ThroughputChart } from "./ThroughputChart";
 import { LatencyChart } from "./LatencyChart";
 import { ErrorRateChart } from "./ErrorRateChart";
+import { Sidebar } from "./Sidebar";
 import {
   MetricsGenerator,
   generateNodeMetrics,
@@ -130,129 +131,215 @@ export function Dashboard() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-100 mb-2">
-            Infrastructure Metrics
-          </h1>
-          <p className="text-sm text-gray-400 font-mono">
-            Real-time cluster performance monitoring
-          </p>
-        </header>
+    <div className="h-screen bg-gray-950 text-gray-100 flex overflow-hidden">
+      <Sidebar
+        metricsData={metricsData}
+        nodeMetrics={nodeMetrics}
+        isLive={isLive}
+      />
 
-        <Controls
-          selectedRange={selectedRange}
-          onRangeChange={handleRangeChange}
-          timeRanges={TIME_RANGES}
-          isLive={isLive}
-          onToggleLive={handleToggleLive}
-        />
-
-        <div className="space-y-6">
-          <section className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-[1600px] mx-auto p-8">
+          <header className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-200">
-                Resource Usage
-              </h2>
-              <div className="flex gap-4 text-xs font-mono">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-0.5 bg-blue-500" />
-                  <span className="text-gray-400">CPU</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-0.5 bg-purple-500" />
-                  <span className="text-gray-400">Memory</span>
+              <div>
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+                  Infrastructure Metrics
+                </h1>
+                <p className="text-sm text-gray-400 font-mono">
+                  Real-time cluster performance monitoring
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg">
+                  <span className="text-xs text-gray-400">Last updated</span>
+                  <p className="text-sm font-mono text-gray-200">
+                    {new Date().toLocaleTimeString()}
+                  </p>
                 </div>
               </div>
             </div>
-            {memoizedLineChart}
-          </section>
+          </header>
 
-          <div className="grid grid-cols-2 gap-6">
-            <section className="bg-gray-900 rounded-lg p-6 border border-gray-800">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-gray-200">
-                  Request Throughput
-                </h2>
-                <span className="text-xs text-gray-400 font-mono">RPS</span>
-              </div>
-              {memoizedThroughputChart}
-            </section>
+          <Controls
+            selectedRange={selectedRange}
+            onRangeChange={handleRangeChange}
+            timeRanges={TIME_RANGES}
+            isLive={isLive}
+            onToggleLive={handleToggleLive}
+          />
 
-            <section className="bg-gray-900 rounded-lg p-6 border border-gray-800">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-gray-200">
-                  Latency Percentiles
-                </h2>
-                <div className="flex gap-3 text-xs font-mono">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-0.5 bg-blue-500" />
-                    <span className="text-gray-400">P50</span>
+          <div className="space-y-6">
+            <section className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-2xl shadow-blue-900/10">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-xl font-bold text-white mb-1">
+                    Resource Usage
+                  </h2>
+                  <p className="text-xs text-gray-400">
+                    System-wide CPU and memory utilization
+                  </p>
+                </div>
+                <div className="flex gap-4 text-xs font-mono bg-gray-800/50 px-4 py-2 rounded-lg border border-gray-700">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-0.5 bg-blue-500 shadow-sm shadow-blue-500" />
+                    <span className="text-gray-300">CPU</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-0.5 bg-amber-500" />
-                    <span className="text-gray-400">P95</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-0.5 bg-red-500" />
-                    <span className="text-gray-400">P99</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-0.5 bg-purple-500 shadow-sm shadow-purple-500" />
+                    <span className="text-gray-300">Memory</span>
                   </div>
                 </div>
               </div>
-              {memoizedLatencyChart}
-            </section>
-          </div>
-
-          <div className="grid grid-cols-2 gap-6">
-            <section className="bg-gray-900 rounded-lg p-6 border border-gray-800">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-gray-200">
-                  Error Rate
-                </h2>
-                <span className="text-xs text-amber-400 font-mono">
-                  Threshold: 1.0%
-                </span>
-              </div>
-              {memoizedErrorRateChart}
+              {memoizedLineChart}
             </section>
 
-            <section className="bg-gray-900 rounded-lg p-6 border border-gray-800">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-gray-200">
-                  Cluster Overview
-                </h2>
-                <div className="flex gap-2 text-xs font-mono">
-                  <span className="text-green-400">
-                    {nodeMetrics.filter((n) => n.status === "healthy").length}{" "}
-                    healthy
-                  </span>
-                  <span className="text-amber-400">
-                    {nodeMetrics.filter((n) => n.status === "degraded").length}{" "}
-                    degraded
-                  </span>
-                  <span className="text-red-400">
-                    {nodeMetrics.filter((n) => n.status === "down").length} down
-                  </span>
+            <div className="grid grid-cols-2 gap-6">
+              <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-xl shadow-emerald-900/10 hover:shadow-emerald-900/20 transition-shadow">
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <h2 className="text-lg font-bold text-white mb-1">
+                      Request Throughput
+                    </h2>
+                    <span className="text-xs text-gray-400 font-mono">
+                      Requests per second
+                    </span>
+                  </div>
+                  <div className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+                    <span className="text-xs text-emerald-400 font-mono font-semibold">
+                      RPS
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="text-sm text-gray-400 font-mono mb-3">
-                {nodeMetrics.length} total nodes across 4 regions
-              </div>
-            </section>
-          </div>
+                {memoizedThroughputChart}
+              </section>
 
-          <section className="bg-gray-900 rounded-lg p-6 border border-gray-800">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-200">
-                Node Health Status
-              </h2>
-              <span className="text-xs text-gray-400 font-mono">
-                Live monitoring
-              </span>
+              <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-xl shadow-amber-900/10 hover:shadow-amber-900/20 transition-shadow">
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <h2 className="text-lg font-bold text-white mb-1">
+                      Latency Percentiles
+                    </h2>
+                    <span className="text-xs text-gray-400 font-mono">
+                      Response time distribution
+                    </span>
+                  </div>
+                  <div className="flex gap-2 text-xs font-mono bg-gray-800/50 px-3 py-1.5 rounded-lg border border-gray-700">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-blue-500" />
+                      <span className="text-gray-300">P50</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-amber-500" />
+                      <span className="text-gray-300">P95</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-red-500" />
+                      <span className="text-gray-300">P99</span>
+                    </div>
+                  </div>
+                </div>
+                {memoizedLatencyChart}
+              </section>
             </div>
-            {memoizedHeatMap}
-          </section>
+
+            <div className="grid grid-cols-2 gap-6">
+              <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-xl shadow-red-900/10 hover:shadow-red-900/20 transition-shadow">
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <h2 className="text-lg font-bold text-white mb-1">
+                      Error Rate
+                    </h2>
+                    <span className="text-xs text-gray-400 font-mono">
+                      Failed request percentage
+                    </span>
+                  </div>
+                  <div className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+                    <span className="text-xs text-amber-400 font-mono font-semibold">
+                      Threshold: 1.0%
+                    </span>
+                  </div>
+                </div>
+                {memoizedErrorRateChart}
+              </section>
+
+              <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-xl">
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <h2 className="text-lg font-bold text-white mb-1">
+                      Cluster Overview
+                    </h2>
+                    <span className="text-xs text-gray-400 font-mono">
+                      {nodeMetrics.length} nodes across 4 regions
+                    </span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+                    <div className="text-3xl font-bold text-green-400 mb-1">
+                      {nodeMetrics.filter((n) => n.status === "healthy").length}
+                    </div>
+                    <div className="text-xs text-gray-400 uppercase tracking-wider">
+                      Healthy
+                    </div>
+                  </div>
+                  <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4">
+                    <div className="text-3xl font-bold text-amber-400 mb-1">
+                      {
+                        nodeMetrics.filter((n) => n.status === "degraded")
+                          .length
+                      }
+                    </div>
+                    <div className="text-xs text-gray-400 uppercase tracking-wider">
+                      Degraded
+                    </div>
+                  </div>
+                  <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+                    <div className="text-3xl font-bold text-red-400 mb-1">
+                      {nodeMetrics.filter((n) => n.status === "down").length}
+                    </div>
+                    <div className="text-xs text-gray-400 uppercase tracking-wider">
+                      Down
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-gray-700">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-400">Cluster Health</span>
+                    <span className="font-semibold text-green-400">
+                      {Math.round(
+                        (nodeMetrics.filter((n) => n.status === "healthy")
+                          .length /
+                          nodeMetrics.length) *
+                          100,
+                      )}
+                      % Operational
+                    </span>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <section className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-2xl">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-xl font-bold text-white mb-1">
+                    Node Health Status
+                  </h2>
+                  <p className="text-xs text-gray-400">
+                    Real-time infrastructure health monitoring
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg">
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-xs text-gray-300 font-mono">
+                    Live monitoring
+                  </span>
+                </div>
+              </div>
+              {memoizedHeatMap}
+            </section>
+          </div>
         </div>
       </div>
     </div>
