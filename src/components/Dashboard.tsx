@@ -131,7 +131,7 @@ export function Dashboard() {
   );
 
   return (
-    <div className="h-screen bg-gray-950 text-gray-100 flex overflow-hidden">
+    <div className="h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex overflow-hidden">
       <Sidebar
         metricsData={metricsData}
         nodeMetrics={nodeMetrics}
@@ -143,17 +143,19 @@ export function Dashboard() {
           <header className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h1 className="text-4xl font-bold text-white mb-2">
+                <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
                   Infrastructure Metrics
                 </h1>
-                <p className="text-sm text-gray-400 font-mono">
+                <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">
                   Real-time cluster performance monitoring
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg">
-                  <span className="text-xs text-gray-400">Last updated</span>
-                  <p className="text-sm font-mono text-gray-200">
+                <div className="px-4 py-2 bg-white dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm">
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                    Last updated
+                  </span>
+                  <p className="text-sm font-mono text-gray-900 dark:text-gray-200">
                     {new Date().toLocaleTimeString()}
                   </p>
                 </div>
@@ -170,24 +172,28 @@ export function Dashboard() {
           />
 
           <div className="space-y-6">
-            <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-2xl">
+            <section className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 shadow-lg dark:shadow-2xl">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-1">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                     Resource Usage
                   </h2>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
                     System-wide CPU and memory utilization
                   </p>
                 </div>
-                <div className="flex gap-4 text-xs font-mono bg-gray-800/50 px-4 py-2 rounded-lg border border-gray-700">
+                <div className="flex gap-4 text-xs font-mono bg-gray-100 dark:bg-gray-800/50 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-0.5 bg-blue-500 shadow-sm shadow-blue-500" />
-                    <span className="text-gray-300">CPU</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      CPU
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-0.5 bg-purple-500 shadow-sm shadow-purple-500" />
-                    <span className="text-gray-300">Memory</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Memory
+                    </span>
                   </div>
                 </div>
               </div>
@@ -195,18 +201,18 @@ export function Dashboard() {
             </section>
 
             <div className="grid grid-cols-2 gap-6">
-              <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-xl hover:shadow-xl transition-shadow">
+              <section className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 shadow-lg dark:shadow-xl hover:shadow-xl transition-shadow">
                 <div className="flex items-center justify-between mb-5">
                   <div>
-                    <h2 className="text-lg font-bold text-white mb-1">
+                    <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
                       Request Throughput
                     </h2>
-                    <span className="text-xs text-gray-400 font-mono">
+                    <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">
                       Requests per second
                     </span>
                   </div>
                   <div className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
-                    <span className="text-xs text-emerald-400 font-mono font-semibold">
+                    <span className="text-xs text-emerald-600 dark:text-emerald-400 font-mono font-semibold">
                       RPS
                     </span>
                   </div>
@@ -214,28 +220,32 @@ export function Dashboard() {
                 {memoizedThroughputChart}
               </section>
 
-              <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-xl shadow-amber-900/10 hover:shadow-amber-900/20 transition-shadow">
+              <section className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 shadow-lg dark:shadow-xl hover:shadow-xl transition-shadow">
                 <div className="flex items-center justify-between mb-5">
                   <div>
-                    <h2 className="text-lg font-bold text-white mb-1">
+                    <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
                       Latency Percentiles
                     </h2>
-                    <span className="text-xs text-gray-400 font-mono">
+                    <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">
                       Response time distribution
                     </span>
                   </div>
-                  <div className="flex gap-2 text-xs font-mono bg-gray-800/50 px-3 py-1.5 rounded-lg border border-gray-700">
+                  <div className="flex gap-2 text-xs font-mono bg-gray-100 dark:bg-gray-800/50 px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700">
                     <div className="flex items-center gap-1.5">
                       <div className="w-2 h-2 rounded-full bg-blue-500" />
-                      <span className="text-gray-300">P50</span>
+                      <span className="text-gray-700">P50</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <div className="w-2 h-2 rounded-full bg-amber-500" />
-                      <span className="text-gray-300">P95</span>
+                      <span className="text-gray-700 dark:text-gray-300">
+                        P95
+                      </span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <div className="w-2 h-2 rounded-full bg-red-500" />
-                      <span className="text-gray-300">P99</span>
+                      <span className="text-gray-700 dark:text-gray-300">
+                        P99
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -244,18 +254,18 @@ export function Dashboard() {
             </div>
 
             <div className="grid grid-cols-2 gap-6">
-              <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-xl hover:shadow-xl transition-shadow">
+              <section className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 shadow-lg dark:shadow-xl hover:shadow-xl transition-shadow">
                 <div className="flex items-center justify-between mb-5">
                   <div>
-                    <h2 className="text-lg font-bold text-white mb-1">
+                    <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
                       Error Rate
                     </h2>
-                    <span className="text-xs text-gray-400 font-mono">
+                    <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">
                       Failed request percentage
                     </span>
                   </div>
                   <div className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-lg">
-                    <span className="text-xs text-amber-400 font-mono font-semibold">
+                    <span className="text-xs text-amber-600 dark:text-amber-400 font-mono font-semibold">
                       Threshold: 1.0%
                     </span>
                   </div>
@@ -263,13 +273,13 @@ export function Dashboard() {
                 {memoizedErrorRateChart}
               </section>
 
-              <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-xl">
+              <section className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 shadow-lg dark:shadow-xl">
                 <div className="flex items-center justify-between mb-5">
                   <div>
-                    <h2 className="text-lg font-bold text-white mb-1">
+                    <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
                       Cluster Overview
                     </h2>
-                    <span className="text-xs text-gray-400 font-mono">
+                    <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">
                       {nodeMetrics.length} nodes across 4 regions
                     </span>
                   </div>
@@ -303,9 +313,11 @@ export function Dashboard() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-gray-700">
+                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-400">Cluster Health</span>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      Cluster Health
+                    </span>
                     <span className="font-semibold text-green-400">
                       {Math.round(
                         (nodeMetrics.filter((n) => n.status === "healthy")
@@ -320,19 +332,19 @@ export function Dashboard() {
               </section>
             </div>
 
-            <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-2xl">
+            <section className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 shadow-lg dark:shadow-2xl">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-1">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                     Node Health Status
                   </h2>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
                     Real-time infrastructure health monitoring
                   </p>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg">
+                <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 rounded-lg">
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xs text-gray-300 font-mono">
+                  <span className="text-xs text-gray-700 dark:text-gray-300 font-mono">
                     Live monitoring
                   </span>
                 </div>

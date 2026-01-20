@@ -35,24 +35,28 @@ export const Sidebar = memo(
     ];
 
     return (
-      <aside className="w-72 h-screen bg-gray-900 border-r border-gray-800 flex flex-col overflow-hidden">
+      <aside className="w-72 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col overflow-hidden">
         {/* Logo & Status */}
-        <div className="p-6 border-b border-gray-800">
+        <div className="p-6 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
               <Zap className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-white">InfraWatch</h1>
-              <p className="text-xs text-gray-400">v2.0.1</p>
+              <h1 className="text-lg font-bold text-gray-900 dark:text-white">
+                InfraWatch
+              </h1>
+              <p className="text-xs text-gray-500 dark:text-gray-400">v2.0.1</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-800/50 border border-gray-700">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700">
             <div
-              className={`w-2 h-2 rounded-full ${isLive ? "bg-green-500 animate-pulse" : "bg-gray-500"}`}
+              className={`w-2 h-2 rounded-full ${
+                isLive ? "bg-green-500 animate-pulse" : "bg-gray-500"
+              }`}
             />
-            <span className="text-sm font-medium text-gray-300">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {isLive ? "Live Monitoring" : "Paused"}
             </span>
           </div>
@@ -65,8 +69,8 @@ export const Sidebar = memo(
               key={item.label}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                 item.active
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
-                  : "text-gray-400 hover:bg-gray-800 hover:text-gray-200"
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
               }`}
             >
               <item.icon className="w-5 h-5" />
@@ -77,20 +81,22 @@ export const Sidebar = memo(
 
         {/* Quick Stats */}
         {latestMetric && (
-          <div className="p-4 border-t border-gray-800 space-y-4 overflow-y-auto">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+          <div className="p-4 border-t border-gray-200 dark:border-gray-800 space-y-4 overflow-y-auto">
+            <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               Live Metrics
             </h3>
 
             <div className="space-y-3">
-              <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+              <div className="bg-gray-100 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-300 dark:border-gray-700">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-gray-400">CPU Usage</span>
-                  <span className="text-sm font-bold text-blue-400">
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                    CPU Usage
+                  </span>
+                  <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
                     {latestMetric.cpu.toFixed(1)}%
                   </span>
                 </div>
-                <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                <div className="h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-blue-500 transition-all duration-500"
                     style={{ width: `${latestMetric.cpu}%` }}
@@ -98,14 +104,16 @@ export const Sidebar = memo(
                 </div>
               </div>
 
-              <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+              <div className="bg-gray-100 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-300 dark:border-gray-700">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-gray-400">Memory</span>
-                  <span className="text-sm font-bold text-purple-400">
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                    Memory
+                  </span>
+                  <span className="text-sm font-bold text-purple-600 dark:text-purple-400">
                     {latestMetric.memory.toFixed(1)}%
                   </span>
                 </div>
-                <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                <div className="h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-purple-500 transition-all duration-500"
                     style={{ width: `${latestMetric.memory}%` }}
@@ -113,20 +121,28 @@ export const Sidebar = memo(
                 </div>
               </div>
 
-              <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+              <div className="bg-gray-100 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-300 dark:border-gray-700">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-gray-400">Throughput</span>
-                  <span className="text-sm font-bold text-emerald-400">
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                    Throughput
+                  </span>
+                  <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
                     {latestMetric.rps} RPS
                   </span>
                 </div>
               </div>
 
-              <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+              <div className="bg-gray-100 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-300 dark:border-gray-700">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-gray-400">Error Rate</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                    Error Rate
+                  </span>
                   <span
-                    className={`text-sm font-bold ${latestMetric.errorRate > 1 ? "text-red-400" : "text-yellow-400"}`}
+                    className={`text-sm font-bold ${
+                      latestMetric.errorRate > 1
+                        ? "text-red-600 dark:text-red-400"
+                        : "text-yellow-600 dark:text-yellow-400"
+                    }`}
                   >
                     {latestMetric.errorRate.toFixed(2)}%
                   </span>
@@ -135,25 +151,29 @@ export const Sidebar = memo(
             </div>
 
             {/* Cluster Health */}
-            <div className="pt-3 border-t border-gray-700">
-              <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+            <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
+              <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
                 Cluster Health
               </h4>
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-400">Healthy</span>
+                  <span className="text-gray-600 dark:text-gray-400">
+                    Healthy
+                  </span>
                   <span className="font-bold text-green-400">
                     {healthyNodes}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-400">Degraded</span>
+                  <span className="text-gray-600 dark:text-gray-400">
+                    Degraded
+                  </span>
                   <span className="font-bold text-amber-400">
                     {degradedNodes}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-400">Down</span>
+                  <span className="text-gray-600 dark:text-gray-400">Down</span>
                   <span className="font-bold text-red-400">{downNodes}</span>
                 </div>
               </div>
