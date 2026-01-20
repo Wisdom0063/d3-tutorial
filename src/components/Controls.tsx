@@ -30,7 +30,7 @@ export const Controls = memo(
                 onClick={() => onRangeChange(range)}
                 className={`px-4 py-2 text-xs font-mono rounded-md transition-all duration-200 ${
                   selectedRange.label === range.label
-                    ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-600/30"
+                    ? "bg-blue-600 text-white shadow-lg"
                     : "bg-transparent text-gray-400 hover:bg-gray-700 hover:text-gray-200"
                 }`}
               >
@@ -45,7 +45,7 @@ export const Controls = memo(
             onClick={onToggleLive}
             className={`px-5 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 flex items-center gap-2.5 border ${
               isLive
-                ? "bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg shadow-green-600/30 border-green-500/50"
+                ? "bg-green-600 text-white shadow-lg border-green-500/50"
                 : "bg-gray-800 text-gray-300 hover:bg-gray-700 border-gray-700"
             }`}
           >

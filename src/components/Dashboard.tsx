@@ -143,7 +143,7 @@ export function Dashboard() {
           <header className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+                <h1 className="text-4xl font-bold text-white mb-2">
                   Infrastructure Metrics
                 </h1>
                 <p className="text-sm text-gray-400 font-mono">
@@ -170,7 +170,7 @@ export function Dashboard() {
           />
 
           <div className="space-y-6">
-            <section className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-2xl shadow-blue-900/10">
+            <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-2xl">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h2 className="text-xl font-bold text-white mb-1">
@@ -195,7 +195,7 @@ export function Dashboard() {
             </section>
 
             <div className="grid grid-cols-2 gap-6">
-              <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-xl shadow-emerald-900/10 hover:shadow-emerald-900/20 transition-shadow">
+              <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-xl hover:shadow-xl transition-shadow">
                 <div className="flex items-center justify-between mb-5">
                   <div>
                     <h2 className="text-lg font-bold text-white mb-1">
@@ -244,7 +244,7 @@ export function Dashboard() {
             </div>
 
             <div className="grid grid-cols-2 gap-6">
-              <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-xl shadow-red-900/10 hover:shadow-red-900/20 transition-shadow">
+              <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-xl hover:shadow-xl transition-shadow">
                 <div className="flex items-center justify-between mb-5">
                   <div>
                     <h2 className="text-lg font-bold text-white mb-1">
@@ -263,7 +263,7 @@ export function Dashboard() {
                 {memoizedErrorRateChart}
               </section>
 
-              <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-xl">
+              <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-xl">
                 <div className="flex items-center justify-between mb-5">
                   <div>
                     <h2 className="text-lg font-bold text-white mb-1">
@@ -320,7 +320,7 @@ export function Dashboard() {
               </section>
             </div>
 
-            <section className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-xl p-6 border border-gray-700/50 shadow-2xl">
+            <section className="bg-gray-900 rounded-xl p-6 border border-gray-700/50 shadow-2xl">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h2 className="text-xl font-bold text-white mb-1">

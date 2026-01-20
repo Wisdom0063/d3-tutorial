@@ -35,11 +35,11 @@ export const Sidebar = memo(
     ];
 
     return (
-      <aside className="w-72 h-screen bg-gradient-to-b from-gray-900 to-gray-950 border-r border-gray-800 flex flex-col overflow-hidden">
+      <aside className="w-72 h-screen bg-gray-900 border-r border-gray-800 flex flex-col overflow-hidden">
         {/* Logo & Status */}
         <div className="p-6 border-b border-gray-800">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
               <Zap className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -92,7 +92,7 @@ export const Sidebar = memo(
                 </div>
                 <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-500"
+                    className="h-full bg-blue-500 transition-all duration-500"
                     style={{ width: `${latestMetric.cpu}%` }}
                   />
                 </div>
@@ -107,7 +107,7 @@ export const Sidebar = memo(
                 </div>
                 <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-purple-500 to-purple-400 transition-all duration-500"
+                    className="h-full bg-purple-500 transition-all duration-500"
                     style={{ width: `${latestMetric.memory}%` }}
                   />
                 </div>
